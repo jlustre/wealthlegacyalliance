@@ -12,6 +12,12 @@ class Logout
      */
     public function __invoke()
     {
+        $user = Auth::user();
+        if ($user) {
+            $user->isOnline = 0;
+            $user->save();
+        }
+
         Auth::guard('web')->logout();
 
         Session::invalidate();

@@ -38,7 +38,12 @@
             </div>
             <div class="flex items-center justify-between mb-1">
                 <div class="flex items-center gap-2">
-                    <input id="remember" name="remember" class="border rounded-sm appearance-none size-4 bg-slate-100 border-slate-200 dark:bg-zink-600/50 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400" type="checkbox" value="">
+                    <input id="remember"
+                    name="remember"
+                    wire:model="remember"
+                    type="checkbox"
+                    value="1"
+                    class="border rounded-sm appearance-none size-4 bg-slate-100 border-slate-200 dark:bg-zink-600/50 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400" type="checkbox" value="">
                     <label for="remember" class="inline-block text-base font-medium align-middle cursor-pointer">{{ __('Remember Me') }}</label>
                 </div>
                 <div class="text-right">
@@ -48,7 +53,20 @@
                 </div>
             </div>
             <div class="mt-2">
-                <button type="submit" class="w-full text-white btn bg-green-500 border-green-500 hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/20">Sign In</button>
+                <button
+                    type="submit"
+                    class="w-full text-white btn bg-green-500 border-green-500 hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/20"
+                    wire:loading.attr="disabled"
+                    wire:target="login"
+                >
+                    <span wire:loading.remove wire:target="login">Sign In</span>
+                    <span wire:loading wire:target="login">
+                        <svg class="inline w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                        </svg>
+                    </span>
+                </button>
             </div>
 
             {{-- @include('partials.social-login') --}}

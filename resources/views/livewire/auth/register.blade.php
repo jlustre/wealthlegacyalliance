@@ -10,13 +10,44 @@
         <x-auth-session-status class="text-center" :status="session('status')" />
 
         <form wire:submit="register" class="mt-4" id="registerForm">
+            <div class="mb-3 flex align-center justify-between gap-1">
+                <div style="width: 50%">
+                    <label for="name" class="inline-block mb-0 text-base font-medium">{{ __('Username') }} <span class="text-red-500">*</span></label>
+                    <input type="text"
+                        id="name"
+                        type="text"
+                        autofocus
+                        wire:model="name"
+                        class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                        placeholder="{{ __('Enter Username') }}"
+                    />
+                    @error('name')
+                        <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div style="width: 50%">
+                    <label for="sponsor_id" class="inline-block mb-0 text-base font-medium">{{ __('Sponsor') }} <span class="text-red-500">*</span></label>
+                    <select id="sponsor_id"
+                    wire:model="sponsor_id"
+                    class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                        <option value="">{{ __('Select Sponsor') }}</option>
+                        @foreach ($this->activeUsers as $sponsor)
+                            <option value="{{ $sponsor->id }}">{{ $sponsor->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('sponsor_id')
+                        <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
             <div class="mb-3">
-                <label for="email" class="inline-block mb-0 text-base font-medium">{{ __('Email') }}</label>
+                <label for="email" class="inline-block mb-0 text-base font-medium">{{ __('Email') }} <span class="text-red-500">*</span></label>
                 <input type="text"
                 id="email"
                 type="email"
                 wire:model="email"
-                autofocus
                 autocomplete="email"
                 class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                 placeholder="{{ __('Enter email address') }}"
@@ -25,44 +56,108 @@
                     <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label for="name" class="inline-block mb-0 text-base font-medium">{{ __('Full Name') }}</label>
-                <input type="text"
-                id="name"
-                type="text"
-                wire:model="name"
-                class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                placeholder="{{ __('Enter Full Name') }}"/>
-                @error('name')
-                    <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
-                @enderror
+            <div class="mb-3 flex align-center justify-between gap-1">
+                <div style="width: 50%">
+                    <label for="password" class="inline-block mb-0 text-base font-medium">{{ __('Password') }} <span class="text-red-500">*</span></label>
+                    <input type="password"
+                    id="password"
+                    type="password"
+                    wire:model="password"
+                    class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                    placeholder="{{ __('Enter password') }}"
+                    />
+                    @error('password')
+                        <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div style="width: 50%">
+                    <label for="password_confirmation" class="inline-block mb-0 text-base font-medium">{{ __('Confirm Password') }} <span class="text-red-500">*</span></label>
+                    <input type="password"
+                    id="password_confirmation"
+                    type="password"
+                    wire:model="password_confirmation"
+                    class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                    placeholder="{{ __('Confirm password') }}"
+                    />
+                    @error('password_confirmation')
+                        <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="password" class="inline-block mb-0 text-base font-medium">{{ __('Password') }}</label>
-                <input type="password"
-                id="password"
-                type="password"
-                wire:model="password"
-                class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                placeholder="{{ __('Enter password') }}"
-                />
-                @error('password')
-                    <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
-                @enderror
+            <div class="mb-3 flex align-center justify-between gap-1">
+                <div style="width: 50%">
+                    <label for="firstname" class="inline-block mb-0 text-base font-medium">{{ __('First Name') }} <span class="text-red-500">*</span></label>
+                    <input type="text"
+                    id="firstname"
+                    type="text"
+                    autofocus
+                    wire:model="firstname"
+                    class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                    placeholder="{{ __('Enter first name') }}"/>
+                    @error('firstname')
+                        <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div style="width: 50%">
+                    <label for="lastname" class="inline-block mb-0 text-base font-medium">{{ __('Last Name') }} <span class="text-red-500">*</span></label>
+                    <input type="text"
+                    id="lastname"
+                    type="text"
+                    autofocus
+                    wire:model="lastname"
+                    class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                    placeholder="{{ __('Enter last name') }}"/>
+                    @error('lastname')
+                        <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="password_confirmation" class="inline-block mb-0 text-base font-medium">{{ __('Confirm Password') }}</label>
-                <input type="password"
-                id="password_confirmation"
-                type="password"
-                wire:model="password_confirmation"
-                class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                placeholder="{{ __('Confirm password') }}"
-                />
+            <div class="mb-3 flex align-center justify-between gap-1">
+                <div style="width: 50%">
+                    <label for="country_id" class="inline-block mb-0 text-base font-medium">{{ __('Country') }}</label>
+                    <select id="country_id"
+                        wire:model="country_id"
+                        class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                        <option value="">Select Country</option>
+                        @foreach($this->activeCountries as $country)
+                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('country_id')
+                        <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div style="width: 50%">
+                    <label for="stateprov_id" class="inline-block mb-0 text-base font-medium">{{ __('State') }}</label>
+                    <select id="stateprov_id"
+                    wire:model="stateprov_id"
+                    class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                        <option value="">{{ __('Select State') }}</option>
+                        @foreach ($this->activeStateprovs as $state)
+                            <option value="{{ $state->id }}">{{ $state->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('stateprov_id')
+                        <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
             <p class="italic text-center text-12 text-slate-500 dark:text-zink-200">{{ __('By registering you agree to WLA') }} <a href="#!" class="underline">{{ __('Terms of Use') }}</a></p>
-            <div class="mt-0">
-                <button type="submit" class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">{{ __('Sign In') }}</button>
+            <div class="mt-2">
+                <button
+                    type="submit"
+                    class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20"
+                    wire:loading.attr="disabled"
+                    wire:target="register"
+                >
+                    <span wire:loading.remove wire:target="register">Sign Up</span>
+                    <span wire:loading wire:target="register">
+                        <svg class="inline w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                        </svg>
+                    </span>
+                </button>
             </div>
 
             <div class="mt-2 text-center">

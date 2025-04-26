@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -40,8 +41,19 @@ class Login extends Component
             ]);
         }
 
+        $user = Auth::user();
+
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
+
+        // Set isOnline to true after successful login
+        $user = Auth::user();
+        if ($user) {
+            $user->isOnline = 1;
+            $user->last_login = now();
+            $user->last_ip = request()->ip();
+            $user->save();
+        }
 
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }

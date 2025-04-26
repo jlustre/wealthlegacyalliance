@@ -30,10 +30,18 @@ class VerifyEmail extends Component
     /**
      * Log the current user out of the application.
      */
-    public function logout(Logout $logout): void
-    {
-        $logout();
+    // public function logout(Logout $logout): void
+    // {
+    //     $logout();
 
-        $this->redirect('/', navigate: true);
+    //     $this->redirect('/', navigate: true);
+    // }
+
+    public function logout()
+    {
+        Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect()->route('login');
     }
 }

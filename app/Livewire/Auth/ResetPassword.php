@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Notifications\PasswordResetSuccess;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -41,7 +42,7 @@ class ResetPassword extends Component
     {
         $this->validate([
             'token' => ['required'],
-            'email' => ['required', 'string', 'email'],
+            'email' => ['required', 'string', 'email', 'exists:users,email'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -57,6 +58,9 @@ class ResetPassword extends Component
                 ])->save();
 
                 event(new PasswordReset($user));
+
+                // Send password reset success notification
+                $user->notify(new PasswordResetSuccess());
             }
         );
 

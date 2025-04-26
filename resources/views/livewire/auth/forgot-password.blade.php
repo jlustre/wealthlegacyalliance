@@ -27,8 +27,21 @@
                     <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="mt-4">
-                <button type="submit" class="cursor-pointer w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">Send Reset Link</button>
+            <div class="mt-2">
+                <button
+                    type="submit"
+                    class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20"
+                    wire:loading.attr="disabled"
+                    wire:target="sendPasswordResetLink"
+                >
+                    <span wire:loading.remove wire:target="sendPasswordResetLink">Send Password Reset Link</span>
+                    <span wire:loading wire:target="sendPasswordResetLink">
+                        <svg class="inline w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                        </svg>
+                    </span>
+                </button>
             </div>
             <div class="mt-2 text-center">
                 <p class="text-sm mb-0">{{ __('Wait, I remember my password...') }} <a href="/login" class="underline fw-medium text-custom-500"> {{ __('Login') }} </a> </p>

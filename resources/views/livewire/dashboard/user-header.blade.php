@@ -141,15 +141,17 @@
         </svg>
     </div>
     <div class="relative card-body">
-    <div class="grid items-center grid-cols-12">
-        <div class="col-span-12 lg:col-span-8 2xl:col-span-7">
-            <h5 class="mb-3 font-normal tracking-wide text-slate-200">Welcome {{ Auth::user()->name }} 🎉</h5>
-            <p class="mb-5 text-slate-400">An ecommerce dashboard has just that purpose. It provides your ecommerce team with a clear overview of key financial and website KPIs at any time.</p>
-            <a href="{{ route('settings.profile') }}" type="button" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-500/20 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-500/20 dark:ring-custom-400/20">{{ __('View My Profile') }}</a>
-        </div>
-        <div class="hidden col-span-12 2xl:col-span-3 lg:col-span-2 lg:col-start-11 2xl:col-start-10 lg:block">
-            <img src="./assets/images/dashboard.png" alt="" class="h-40 ltr:2xl:ml-auto rtl:2xl:mr-auto">
+        <div class="grid items-center grid-cols-12">
+            <div class="col-span-12 lg:col-span-8 2xl:col-span-7">
+                <h5 class="mb-3 font-normal tracking-wide text-slate-200">Welcome {{ Auth::user()->fullname }} 🎉</h5>
+                @if ( !empty(Auth::user()->bio) )
+                <p class="mb-5 text-slate-400">{{ Auth::user()->bio }}</p>
+                @endif
+                <a href="{{ route('settings.profile') }}" type="button" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-500/20 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-500/20 dark:ring-custom-400/20">{{ __('View My Profile') }}</a>
+            </div>
+            <div class="hidden col-span-12 2xl:col-span-3 lg:col-span-2 lg:col-start-11 2xl:col-start-10 lg:block">
+                <img src="./assets/images/dashboard.png" alt="" class="h-40 ltr:2xl:ml-auto rtl:2xl:mr-auto">
+            </div>
         </div>
     </div>
-</div>
 </div><!--end col-->

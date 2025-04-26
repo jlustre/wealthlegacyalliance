@@ -1,3 +1,3 @@
-<x-layouts.auth.front :title="$title ?? null">
+<x-layouts.app.front :title="$title ?? null">
     {{ $slot }}
-</x-layouts.auth.front>
+</x-layouts.app.front>

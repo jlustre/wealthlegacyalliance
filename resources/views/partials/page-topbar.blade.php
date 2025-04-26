@@ -208,7 +208,7 @@
                                     <span class="-top-1 ltr:-right-1 rtl:-left-1 absolute w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full dark:border-zink-600"></span>
                                 </div>
                                 <div>
-                                    <h6 class="mb-1 text-15">{{ Auth::user()->name }}</h6>
+                                    <h6 class="mb-1 text-15">{{ Auth::user()->fullname }}</h6>
                                     <p class="text-slate-500 dark:text-zink-300">CEO & Founder</p>
                                 </div>
                             </a>
