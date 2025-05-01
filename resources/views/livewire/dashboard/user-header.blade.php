@@ -146,6 +146,8 @@
                 <h5 class="mb-3 font-normal tracking-wide text-slate-200">Welcome {{ Auth::user()->fullname }} 🎉</h5>
                 @if ( !empty(Auth::user()->bio) )
                 <p class="mb-5 text-slate-400">{{ Auth::user()->bio }}</p>
+                @else
+                <p class="mb-5 text-slate-400">Hello! I'm part of the Wealth Legacy Alliance community. Excited to connect and grow together on this journey to financial freedom. Feel free to reach out!</p>
                 @endif
                 <a href="{{ route('settings.profile') }}" type="button" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-500/20 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-500/20 dark:ring-custom-400/20">{{ __('View My Profile') }}</a>
             </div>

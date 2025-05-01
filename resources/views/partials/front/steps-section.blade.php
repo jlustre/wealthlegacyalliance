@@ -109,27 +109,27 @@
     <div id="step1Modal" class="container hidden mt-4 lg:fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" data-modal>
         <div class="bg-slate-100 dark:bg-slate-900 border border-slate-200 rounded-lg shadow-lg p-8 w-full relative">
             <button data-modal-close class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
-            <h3 class="border-b text-2xl font-semibold mb-4 text-green-600 dark:text-white">{{ __('Step 1: Discover Your Foundation - Explore Our Site and Register') }}</h3>
+            <h3 class="border-b text-2xl font-semibold mb-4 text-green-600">{{ __('Step 1: Discover Your Foundation - Explore Our Site and Register') }}</h3>
             <p class="text-slate-600 dark:text-white mb-4">
                 {{ __('Embarking on your path to financial freedom with Wealth Legacy Alliance begins with a crucial first step: taking the time to thoroughly explore our online platform and formally join our community.') }}
             </p>
-            <h3 class="border-b text-xl font-semibold mb-4 text-green-600 dark:text-white">{{ __('Immerse Yourself in Our Vision') }}</h3>
+            <h3 class="border-b text-xl font-semibold mb-4 text-green-600">{{ __('Immerse Yourself in Our Vision') }}</h3>
             <p class="text-slate-600 dark:text-white mb-4">
                 {{ __('Navigate through the pages of our website to gain a comprehensive understanding of the Wealth Legacy Alliance model. Delve into the intricacies of our collaborative wealth-building approach, where we strategically partner with a diverse array of reputable Multi-Level Marketing companies. Discover how this unique strategy provides you with multiple income streams and a resilient financial foundation, shielding you from the potential volatility of relying on a single MLM venture.') }}
             </p>
-            <h3 class="border-b text-xl font-semibold mb-4 text-green-600 dark:text-white">{{ __('Understand the Power of Unified Effort') }}</h3>
+            <h3 class="border-b text-xl font-semibold mb-4 text-green-600">{{ __('Understand the Power of Unified Effort') }}</h3>
             <p class="text-slate-600 dark:text-white mb-4">
                 {{ __("Pay close attention to the explanation of our groundbreaking 'recruit once, benefit across all' system. Visualize the efficiency of building a core team whose contributions resonate across all our current and future partner MLM opportunities. This innovative approach maximizes your time and effort, allowing you to focus on nurturing a strong network that yields compounding benefits.") }}
             </p>
-            <h3 class="border-b text-xl font-semibold mb-4 text-green-600 dark:text-white">{{ __('Experience the Strength of Our Community') }}</h3>
+            <h3 class="border-b text-xl font-semibold mb-4 text-green-600">{{ __('Experience the Strength of Our Community') }}</h3>
             <p class="text-slate-600 dark:text-white mb-4">
                 {{ __("Explore testimonials and member spotlights to witness the tangible impact of the Wealth Legacy Alliance community. Understand our commitment to collaboration, mutual support, and shared success. Discover the resources and mentorship opportunities that underscore our dedication to empowering every member on their financial journey.") }}
             </p>
-            <h3 class="border-b text-xl font-semibold mb-4 text-green-600 dark:text-white">{{ __('Review Your Gateway to Opportunity') }}</h3>
+            <h3 class="border-b text-xl font-semibold mb-4 text-green-600">{{ __('Review Your Gateway to Opportunity') }}</h3>
             <p class="text-slate-600 dark:text-white mb-4">
                 {{ __("Locate and carefully review any available membership options. Understand the varying levels of access to resources, training, and potential earning structures. Consider your individual goals and commitment level to select the pathway that best aligns with your aspirations within the Wealth Legacy Alliance framework.") }}
             </p>
-            <h3 class="border-b text-xl font-semibold mb-4 text-green-600 dark:text-white">{{ __('Take the Decisive Step: Complete Your Registration') }}</h3>
+            <h3 class="border-b text-xl font-semibold mb-4 text-green-600">{{ __('Take the Decisive Step: Complete Your Registration') }}</h3>
             <p class="text-slate-600 dark:text-white mb-4">
                 {{ __("When you feel confident and ready to unlock your potential within our collective, navigate to our Registration or 'Sign Up' page. Follow the intuitive prompts to complete the registration form, providing accurate details. By agreeing to our terms and conditions and privacy policy, you officially become a valued member of the Wealth Legacy Alliance community. This pivotal first step directly connects you to a world of diverse income-generating opportunities and a supportive network of individuals, all striving for shared success.") }}
             </p>

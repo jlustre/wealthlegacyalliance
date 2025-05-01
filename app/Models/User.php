@@ -28,6 +28,21 @@ class User extends Authenticatable implements MustVerifyEmail
         'lastname',
         'email',
         'password',
+        'phone',
+        'address',
+        'city',
+        'postalcode',
+        'country_id',
+        'stateprov_id',
+        'timezone_id',
+        'avatar',
+        'isOnline',
+        'last_login',
+        'last_ip',
+        'role',
+        'status',
+        'bio'
+
     ];
 
     /**
@@ -109,13 +124,17 @@ class User extends Authenticatable implements MustVerifyEmail
     // get country iso3
     public function getCountryIso3Attribute(): string
     {
-        return $this->country?->iso3 ?? '';
+        return $this->country->iso3 ?? '';
     }
 
     // get stateprov abbreviation
     public function getStateprovAbbreviationAttribute(): string
     {
-        return $this->stateprov?->abbreviation ?? '';
+        return $this->stateprov->abbreviation ?? '';
+    }
+    public function getTimezoneAbbreviationAttribute(): string
+    {
+        return $this->timezone->abbreviation ?? '';
     }
 
     public function country()
@@ -126,4 +145,37 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Stateprov::class);
     }
+    public function timezone()
+    {
+        return $this->belongsTo(Timezone::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isMentor(): bool
+    {
+        return $this->role === 'mentor';
+    }
+
+    public function isEditor(): bool
+    {
+        return $this->role === 'editor';
+    }
+
+    public function getIsAdminAttribute(): bool
+    {
+      return $this->isAdmin();
+    }
+    public function getIsMentorAttribute(): bool
+    {
+      return $this->isMentor();
+    }
+    public function getIsEditorAttribute(): bool
+    {
+      return $this->isEditor();
+    }
+
 }

@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 pb-6 text-center">
             <h2 class="text-muted dark:text-slate-100 text-3xl mb-4">What Our Members Say</h2>
 
-            <p class="text-slate-400 max-w-3xl mx-auto">Discover firsthand the transformative power of Wealth Legacy Alliance through the voices of our members. In this section, you'll find genuine testimonials and success stories from individuals who have embraced our collaborative model and are achieving remarkable financial growth and building lasting legacies. Hear about their experiences with our unique "recruit once, benefit across all" system, the invaluable support they've received from our vibrant community, and the tangible impact of our strategic partnerships on their income and financial stability. Their stories offer a real and inspiring glimpse into the potential that awaits you within Wealth Legacy Alliance.</p>
+            <p class="text-slate-400 max-w-3xl mx-auto">In this section, you'll find genuine testimonials and success stories from individuals who have embraced our collaborative model and are achieving remarkable financial growth and building lasting legacies. Hear about their experiences with our unique "recruit once, benefit across all" system, the invaluable support they've received from our vibrant community, and the tangible impact of our strategic partnerships on their income and financial stability. Their stories offer a real and inspiring glimpse into the potential that awaits you within Wealth Legacy Alliance.</p>
         </div><!--end grid-->
 
         <div class="grid grid-cols-1 mt-6">

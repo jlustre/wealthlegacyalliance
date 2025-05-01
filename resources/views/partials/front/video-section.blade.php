@@ -2,7 +2,7 @@
     <div class="container relative">
         <div class="grid grid-cols-1 justify-center">
             <div class="relative z-1">
-                <div class="grid grid-cols-1 md:text-start text-center justify-center mt-10">
+                <div class="grid grid-cols-1 md:text-start text-center justify-center mt-20">
                     <div class="relative">
                         <img src="{{ asset('assets/front/images/home.png') }}" alt="">
                         <div class="absolute top-1/4 translate-y-2/4 start-0 end-0 text-center">
@@ -12,12 +12,6 @@
                             </a>
                         </div>
                     </div>
-                    @guest
-                      <div class="relative mt-8 text-center">
-                        <a href="{{ route('register') }}" class="h-10 px-6 tracking-wide inline-flex items-center justify-center font-medium rounded-md bg-yellow-500 text-white">Get Started</a>
-                      </div>
-                    @endguest
-
                 </div>
                 <div class="container md:mt-8">
                     <div class="grid lg:grid-cols-12 grid-cols-1 md:text-start text-center justify-center">
@@ -25,15 +19,18 @@
                             <div class="grid md:grid-cols-2 grid-cols-1 items-center">
                                 <div class="mt-8">
                                     <div class="section-title text-md-start">
-                                        <h6 class="text-white/70 text-sm font-semibold uppercase">Get Free Trial</h6>
-                                        <h3 class="font-semibold text-2xl leading-normal text-white mt-2">Get An Easy Start <br> With Upcover Now</h3>
+                                        <h6 class="text-slate-500 text-sm font-semibold uppercase">Join Us Now</h6>
+                                        <h3 class="font-semibold text-2xl leading-normal text-green-500 mt-2">Get Started <br> With WLA Now</h3>
                                     </div>
                                 </div>
-
                                 <div class="mt-8">
                                     <div class="section-title text-md-start">
-                                        <p class="text-white/70 max-w-xl mx-auto mb-2">This is just a simple text made for this unique and awesome template, you can replace it with any text.</p>
-                                        <a href="" class="text-white">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
+                                        <p class="text-slate-500 max-w-xl mx-auto mb-2">Discover firsthand the transformative power of Wealth Legacy Alliance through exploring more our site.</p>
+                                        @auth
+                                          <a href="{{ route('dashboard') }}" class="h-10 px-6 tracking-wide inline-flex items-center justify-center font-medium rounded-md bg-green-500 text-white">Dashboard</a>
+                                        @else
+                                          <a href="{{ route('register') }}" class="h-10 px-6 tracking-wide inline-flex items-center justify-center font-medium rounded-md bg-yellow-500 hover:bg-yellow-600 text-white">Get Started</a>
+                                        @endauth
                                     </div>
                                 </div>
                             </div>

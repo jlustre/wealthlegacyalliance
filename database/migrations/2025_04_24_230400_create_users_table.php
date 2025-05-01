@@ -24,13 +24,13 @@ return new class extends Migration
             $table->unsignedBigInteger('timezone_id')->nullable()->index();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('phone')->nullable();
+            $table->string('phone');
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('postalcode')->nullable();
             $table->string('avatar')->nullable();
             $table->string('bio')->nullable();
-            $table->enum('status', ['active','onhold','inactive','suspended'])->default('active');
+            $table->enum('status', ['active','pending','inactive','suspended'])->default('active');
             $table->enum('role', ['admin','mentor','editor','user'])->default('user');
             $table->boolean('isOnline')->default(0);
             $table->timestamp('last_login')->nullable();
@@ -43,7 +43,7 @@ return new class extends Migration
         // add an admin user
         $user = new \App\Models\User();
         $user->name = 'admin';
-        $user->email = 'admin@gmail.com';
+        $user->email = 'jclustre@gmail.com';
         $user->firstname = 'Admin';
         $user->lastname = 'User';
         $user->sponsor_id = 1;
@@ -55,7 +55,7 @@ return new class extends Migration
         $user->address = '7416 Canada Way';
         $user->city = 'Burnaby';
         $user->postalcode = 'V3N3J6';
-        $user->bio = "Hello! I'm the administrator here. If you have any questions or need help navigating the platform, feel free to get in touch.";
+        $user->bio = "Hello! I'm an administrator here. If you have any questions or need help navigating the platform, feel free to get in touch.";
         $user->status = 'active';
         $user->role = 'admin';
         $user->isOnline = 0;
@@ -70,9 +70,9 @@ return new class extends Migration
 
         // add a regular user
         $user = new \App\Models\User();
-        $user->name = 'jclustre';
-        $user->email = 'jclustre@gmail.com';
-        $user->firstname = 'Joey';
+        $user->name = 'jblustre';
+        $user->email = 'jblustre@gmail.com';
+        $user->firstname = 'Joane';
         $user->lastname = 'Lustre';
         $user->sponsor_id = 1;
         $user->country_id = 224;
@@ -83,9 +83,9 @@ return new class extends Migration
         $user->address = '4387 Sta Rita Rd';
         $user->city = 'California';
         $user->postalcode = '94803';
-        $user->bio = "Hello! I'm the administrator here. If you have any questions or need help navigating the platform, feel free to get in touch.";
+        $user->bio = "Hello! I'm a Mentor here. If you have any questions or need help navigating the platform, feel free to get in touch.";
         $user->status = 'active';
-        $user->role = 'admin';
+        $user->role = 'mentor';
         $user->isOnline = 0;
         $user->last_login = null;
         $user->last_ip = '';

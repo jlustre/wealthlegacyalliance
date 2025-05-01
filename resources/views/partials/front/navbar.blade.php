@@ -47,7 +47,7 @@
                     <a class="nav-link" href="#video">Video</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#review">Testimonial</a>
+                    <a class="nav-link" href="#review">Testimonials</a>
                 </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="#pricing">Pricing</a>

@@ -21,7 +21,7 @@
                 </div>
             </div><!--end col-->
         </div><!--end grid-->
-
+        <x-auth-session-status class="text-center" :status="session('status')" />
         <div class="overflow-x-auto">
             <table class="w-full whitespace-nowrap mb-2">
                 <thead class="ltr:text-left rtl:text-right bg-slate-100 text-slate-500 dark:text-zink-200 dark:bg-zink-600">
@@ -34,10 +34,11 @@
                         <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Sponsor</th>
                         <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Country</th>
                         <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">State</th>
-                        <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Email</th>
-                        <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Phone</th>
+                        <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Timezone</th>
+                        <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Email<br/>Phone</th>
+                        <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Role</th>
                         <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Online</th>
-                        <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Last Login</th>
+                        <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Last Login<br/>Last IP</th>
                         <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Joined</th>
                         <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Status</th>
                         <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-y border-slate-200 dark:border-zink-500">Action</th>
@@ -55,9 +56,9 @@
                                 <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
                                     <div class="flex items-center gap-2">
                                         <img
-                                            src="{{ $user->avatar_url ?? asset('images/default-avatar.png') }}"
+                                            src="{{ $user->avatar ?? asset('assets/images/default-avatar.png') }}"
                                             alt="{{ $user->name }}"
-                                            class="w-8 h-8 rounded-full object-cover border border-slate-200 dark:border-zink-500"
+                                            class="bg-green-100 w-8 h-8 rounded-full object-cover border border-slate-200 dark:border-zink-500"
                                         >
                                         <a href="apps-ecommerce-order-overview.html">{{ $user->name }}</a>
                                     </div>
@@ -66,8 +67,8 @@
                                 <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">{{ $user->sponsorName }}</td>
                                 <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">{{ $user->countryIso3 }}</td>
                                 <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">{{ $user->stateprovAbbreviation }}</td>
-                                <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500 text-xs">{{ $user->email }}</td>
-                                <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500 text-sm">
+                                <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">{{ $user->timezoneAbbreviation }}</td>
+                                <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500 text-xs">{{ $user->email }}<br/>
                                     @php
                                         $digits = preg_replace('/\D/', '', $user->phone);
                                         $formatted = (strlen($digits) === 10)
@@ -75,6 +76,9 @@
                                             : $user->phone;
                                     @endphp
                                     {{ $formatted }}
+                                </td>
+                                <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
+                                    {{ $user->role }}
                                 </td>
                                 <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500">
                                     @if ($user->isOnline)
@@ -88,7 +92,8 @@
                                     @endif
                                 </td>
                                 <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500 text-xs">
-                                    {{ $user->last_login ? \Carbon\Carbon::parse($user->last_login)->diffForHumans() : 'Never' }}
+                                    {{ $user->last_login ? \Carbon\Carbon::parse($user->last_login)->diffForHumans() : 'Never' }}<br/>
+                                    {{ $user->last_ip ?? 'N/A' }}
                                 </td>
                                 <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500 text-xs">
                                     {{ $user->created_at ? \Carbon\Carbon::parse($user->created_at)->diffForHumans() : 'Never' }}
