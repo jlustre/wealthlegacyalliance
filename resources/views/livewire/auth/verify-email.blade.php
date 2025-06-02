@@ -11,7 +11,7 @@
             </p>
         @else
             <p class="text-center text-slate-500 dark:text-zink-200">
-                {{ __('Please verify your email address by clicking on the link we just emailed to you. Please check your email.') }}
+                {{ __('Please verify your email address by clicking on the link we just emailed to you. Please check your email first. If you did not receive our email then click the Resend button below.') }}
             </p>
         @endif
         <div class="flex flex-col items-center justify-between space-y-3 mt-8">

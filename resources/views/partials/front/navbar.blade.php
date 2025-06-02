@@ -3,10 +3,10 @@
     <div class="container relative flex flex-wrap items-center justify-between">
         <a class="navbar-brand md:me-8" href="{{ route('home') }}">
             <span class="inline-block dark:hidden">
-                <img src="{{ asset('assets/front/images/logo-dark.png') }}" class="l-dark" alt="">
-                <img src="{{ asset('assets/front/images/logo-light.png') }}" class="l-light" alt="">
+                <img src="{{ asset('assets/front/images/logo-dark.png') }}" class="l-dark" alt="" onerror="this.onerror=null;this.src='{{ asset('assets/front/images/logo-white.png') }}';">
+                <img src="{{ asset('assets/front/images/logo-white.png') }}" class="l-light" alt="">
+                <img src="{{ asset('assets/front/images/logo-light.png') }}" class="hidden dark:inline-block" alt="">
             </span>
-            <img src="{{ asset('assets/front/images/logo-light.png') }}" class="hidden dark:inline-block" alt="">
         </a>
 
         <div class="nav-icons flex items-center lg_992:order-2 ms-auto md:ms-8">

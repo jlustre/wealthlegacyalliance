@@ -34,6 +34,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'postalcode',
         'country_id',
         'stateprov_id',
+        'stateprov',
         'timezone_id',
         'avatar',
         'isOnline',
@@ -95,6 +96,72 @@ class User extends Authenticatable implements MustVerifyEmail
             ->implode(' ');
     }
 
+    //get the formatted phone attribute in (999) 999-9999 format
+    public function getFormattedPhoneAttribute(): ?string
+    {
+      if (!$this->phone) {
+        return null;
+      }
+      // Remove all non-numeric characters
+      $digits = preg_replace('/\D+/', '', $this->phone);
+
+      // Format if 10 digits
+      if (strlen($digits) === 10) {
+        return sprintf('(%s) %s-%s',
+          substr($digits, 0, 3),
+          substr($digits, 3, 3),
+          substr($digits, 6, 4)
+        );
+      }
+
+      // Return original if not 10 digits
+      return $this->phone;
+    }
+
+    //get join date in a human readable format
+    public function getJoinDateAttribute(): string
+    {
+        return $this->created_at->diffForHumans();
+    }
+
+    public function getLastLoginHumanAttribute(): ?string
+    {
+      return $this->last_login ? \Carbon\Carbon::parse($this->last_login)->diffForHumans() : null;
+    }
+
+    //get location attribute
+    public function getLocationAttribute()
+    {
+        $city = $this->city;
+
+        // Try to resolve stateprov relation, fallback to raw value
+        $state = '';
+        if ($this->relationLoaded('stateprov') && $this->stateprov) {
+            $state = $this->stateprov->abbreviation ?? $this->stateprov->name ?? '';
+        } elseif ($this->stateprov_id && $this->stateprov) {
+            $state = is_object($this->stateprov)
+                ? ($this->stateprov->abbreviation ?? $this->stateprov->name ?? '')
+                : $this->stateprov;
+        } elseif (!empty($this->stateprov)) {
+            $state = $this->stateprov;
+        }
+
+        // Try to resolve country relation, fallback to raw value
+        $country = '';
+        if ($this->relationLoaded('country') && $this->country) {
+            $country = $this->country->name ?? $this->country->iso3 ?? '';
+        } elseif ($this->country_id && $this->country) {
+            $country = is_object($this->country)
+                ? ($this->country->name ?? $this->country->iso3 ?? '')
+                : $this->country;
+        } elseif (!empty($this->country)) {
+            $country = $this->country;
+        }
+
+        $parts = array_filter([$city, $state, $country]);
+        return implode(', ', $parts);
+    }
+
     /**
      * Get the user sponsor's name by using sponsor_id from the users table
      * @return string
@@ -127,6 +194,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->country->iso3 ?? '';
     }
 
+    //get stateprov
+    public function getStateprovNameAttribute(): string
+    {
+        return $this->stateprov && is_object($this->stateprov)
+            ? ($this->stateprov->name ?? '')
+            : ($this->stateprov ?? '');
+    }
+
     // get stateprov abbreviation
     public function getStateprovAbbreviationAttribute(): string
     {
@@ -136,6 +211,21 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->timezone->abbreviation ?? '';
     }
+
+    public function getIsOnlineAttribute(): string
+    {
+        // Example: online if last_login within 5 minutes
+        if ($this->last_login && \Carbon\Carbon::parse($this->last_login)->gt(now()->subMinutes(5))) {
+            return 'Yes';
+        }
+        return 'No';
+    }
+
+    public function getUserRoleAttribute(): string
+    {
+      return isset($this->attributes['role']) ? ucfirst($this->attributes['role']) : '';
+    }
+
 
     public function country()
     {

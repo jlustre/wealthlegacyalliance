@@ -6,7 +6,7 @@
             </div><!--end col-->
             <div class="">
                 <div class="flex gap-3">
-                    <a href="{{ route('users.index') }}" type="button" class="flex items-center text-white btn bg-slate-500 border-slate-500 hover:text-white hover:bg-slate-600 hover:border-slate-600 focus:text-white focus:bg-slate-600 focus:border-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:border-slate-600 active:ring active:ring-slate-100 dark:ring-slate-400/20 text-nowrap">
+                    <a href="" type="button" class="flex items-center text-white btn bg-slate-500 border-slate-500 hover:text-white hover:bg-slate-600 hover:border-slate-600 focus:text-white focus:bg-slate-600 focus:border-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:border-slate-600 active:ring active:ring-slate-100 dark:ring-slate-400/20 text-nowrap">
                         <i data-lucide="arrow-left-from-line" class="inline text-xs align-middle ltr:pr-1 rtl:pl-1"></i>
                         Go Back
                     </a>

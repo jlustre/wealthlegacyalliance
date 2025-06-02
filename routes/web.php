@@ -16,9 +16,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::redirect('settings', 'settings/profile');
     Route::view('dashboard', 'dashboard')->name('dashboard');
-
-    Route::get('users', UserIndex::class)->name('users.index');
-    Route::get('users/create', UserCreate::class)->name('users.create');
+    Route::view('profile', 'profile')->name('profile');
 
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
@@ -26,7 +24,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    Route::get('admin/dashboard', AdminDashboard::class)->name('admin.dashboard');
+  Route::view('admin/dashboard', 'admin/dashboard', ['pagetitle' => 'Admin Dashboard'])->name('admin.dashboard');
+  Route::view('admin/users', 'admin/users', ['pagetitle' => 'Users'])->name('admin.users');
+
+  // Route::get('admin/users', UserIndex::class)->name('admin.users');
+  Route::get('admin/users/create', UserCreate::class)->name('admin.users.create');
+
 });
 Route::middleware(['auth', 'verified', 'mentor'])->group(function () {
     Route::get('mentor/dashboard', MentorDashboard::class)->name('mentor.dashboard');

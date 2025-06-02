@@ -132,7 +132,7 @@ class UserCreate extends Component
     ]);
 
     session()->flash('status', 'User created successfully.');
-    return redirect()->route('users.index');
+    return redirect()->route('admin.users');
   }
 
   public function resetFields()

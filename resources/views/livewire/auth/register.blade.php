@@ -1,5 +1,5 @@
 <div class="mb-0 border-none lg:w-[500px] card bg-white/70 shadow-none dark:bg-zink-500/70">
-    <div class="!px-10 !py-12 card-body">
+    <div class="!px-0 lg:!px-10 !py-12 card-body">
         @include('partials.logo')
 
         <div class="mt-8 text-center">
@@ -28,21 +28,22 @@
 
                 <div style="width: 50%">
                     <label for="sponsor_id" class="inline-block mb-0 text-base font-medium">{{ __('Sponsor') }} <span class="text-red-500">*</span></label>
-                    <select id="sponsor_id"
-                    wire:model="sponsor_id"
-                    class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
-                        <option value="">{{ __('Select Sponsor') }}</option>
-                        @foreach ($this->activeUsers as $sponsor)
-                            <option value="{{ $sponsor->id }}">{{ $sponsor->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('sponsor_id')
-                        <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
-                    @enderror
+                      <select id="sponsor_id"
+                      wire:model="sponsor_id"
+                      class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                          <option value="">{{ __('Select Sponsor') }}</option>
+                          @foreach ($this->activeUsers as $sponsor)
+                              <option value="{{ $sponsor->id }}">{{ $sponsor->name }}</option>
+                          @endforeach
+                      </select>
+                      @error('sponsor_id')
+                          <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                      @enderror
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 flex align-center justify-between gap-1">
+              <div style="width: 50%">
                 <label for="email" class="inline-block mb-0 text-base font-medium">{{ __('Email') }} <span class="text-red-500">*</span></label>
                 <input type="text"
                 id="email"
@@ -55,6 +56,21 @@
                 @error('email')
                     <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
                 @enderror
+              </div>
+              <div style="width: 50%">
+                <label for="phone" class="inline-block mb-0 text-base font-medium">{{ __('Phone') }} <span class="text-red-500">*</span></label>
+                <input type="text"
+                  id="phone"
+                  type="phone"
+                  wire:model="phone"
+                  autocomplete="phone"
+                  class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                  placeholder="{{ __('Enter phone number') }}"
+                />
+                @error('phone')
+                  <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                @enderror
+              </div>
             </div>
             <div class="mb-3 flex align-center justify-between gap-1">
                 <div style="width: 50%">
@@ -79,9 +95,6 @@
                     class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                     placeholder="{{ __('Confirm password') }}"
                     />
-                    @error('password_confirmation')
-                        <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
-                    @enderror
                 </div>
             </div>
             <div class="mb-3 flex align-center justify-between gap-1">
@@ -114,29 +127,41 @@
             </div>
             <div class="mb-3 flex align-center justify-between gap-1">
                 <div style="width: 50%">
-                    <label for="country_id" class="inline-block mb-0 text-base font-medium">{{ __('Country') }}</label>
+                    <label for="country_id" class="inline-block mb-0 text-base font-medium">{{ __('Country') }} <span class="text-red-500">*</span></label>
                     <select id="country_id"
-                        wire:model="country_id"
-                        class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
-                        <option value="">Select Country</option>
-                        @foreach($this->activeCountries as $country)
-                            <option value="{{ $country->id }}">{{ $country->name }}</option>
-                        @endforeach
+                      wire:model.live="country_id"
+                      name="country_id"
+                      class="w-full h-10 form-input ...">
+                      <option value="">Select Country</option>
+                      @foreach($this->activeCountries as $country)
+                          <option value="{{ (string) $country->id }}">{{ $country->name }}</option>
+                      @endforeach
                     </select>
                     @error('country_id')
                         <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
                     @enderror
                 </div>
                 <div style="width: 50%">
-                    <label for="stateprov_id" class="inline-block mb-0 text-base font-medium">{{ __('State') }}</label>
-                    <select id="stateprov_id"
-                    wire:model="stateprov_id"
-                    class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
-                        <option value="">{{ __('Select State') }}</option>
-                        @foreach ($this->activeStateprovs as $state)
-                            <option value="{{ $state->id }}">{{ $state->name }}</option>
-                        @endforeach
-                    </select>
+                    <label for="stateprov_id" class="inline-block mb-0 text-base font-medium">{{ __('State') }} <span class="text-red-500">*</span></label>
+                    @if(!empty($country_id) && ($country_id !== '37' && $country_id !== '224'))
+                      <input type="hidden" id="stateprov_id" name="9999" />
+                      <input type="text"
+                        name="stateprov"
+                        wire:model="stateprov"
+                        class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                        placeholder="{{ __('Enter state/province') }}"
+                       />
+                    @else
+                      <select id="stateprov_id"
+                          wire:model.live="stateprov_id"
+                          name="stateprov_id"
+                          class="w-full h-10 form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                          <option value="">{{ __('Select State/Province') }}</option>
+                          @foreach ($this->activeStateprovs as $state)
+                              <option value="{{ $state->id }}">{{ $state->name }}</option>
+                          @endforeach
+                      </select>
+                    @endif
                     @error('stateprov_id')
                         <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
                     @enderror
@@ -164,6 +189,10 @@
                 <p class="mb-0 text-slate-500 dark:text-zink-200">{{ __('Already have an account?') }} <a href="/login" class="font-semibold underline transition-all duration-150 ease-linear text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500">{{ __('Login') }}</a> </p>
             </div>
         </form>
+        <div class="mt-4 text-left text-sm">
+          <span class="text-red-500">*</span> Required
+        </div>
+
     </div>
 </div>
 @section('scripts')

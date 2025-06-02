@@ -21,7 +21,7 @@
     @include('partials.right-sidebar')
     @include('partials.back-to-top')
     @include('partials.main-scripts')
-
+    @include('partials.script-modal')
     @fluxScripts
 </body>
 </html>
